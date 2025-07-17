@@ -1,22 +1,22 @@
-import { View, type ViewProps } from "react-native";
+import { FlatList, FlatListProps } from "react-native";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-export type ThemedViewProps = ViewProps & {
+export type ThemedFlatListProps<T> = FlatListProps<T> & {
   lightColor?: string;
   darkColor?: string;
 };
 
-export function ThemedView({
+export function ThemedFlatList<T>({
   style,
   lightColor,
   darkColor,
   ...otherProps
-}: ThemedViewProps) {
+}: ThemedFlatListProps<T>) {
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     "background"
   );
 
-  return <View style={[{ backgroundColor }, style]} {...otherProps} />;
+  return <FlatList style={[{ backgroundColor }, style]} {...otherProps} />;
 }
