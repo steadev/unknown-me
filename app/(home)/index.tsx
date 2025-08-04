@@ -3,6 +3,7 @@ import {
   Platform,
   Pressable,
   StyleSheet,
+  Text,
   TextInput,
   View,
 } from "react-native";
@@ -15,39 +16,70 @@ import React from "react";
 export default function HomeScreen() {
   const [data, setData] = React.useState([]);
 
+  const onPressMenuButton = () => {};
+
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
-      style={{ flex: 1 }}
-    >
-      <ThemedFlatList
-        contentContainerStyle={{ flex: 1 }}
-        data={data}
-        renderItem={({ item }) => <></>}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <ThemedText>무슨 생각을 하고 계신가요?</ThemedText>
-          </View>
-        }
-      />
-      <View style={styles.footer}>
-        <View style={styles.inputWrapper}>
-          <TextInput
-            autoFocus={true}
-            style={styles.input}
-            placeholder={"무슨 생각을 하고 계신가요?"}
-            placeholderTextColor={"#a6a5a5"}
-          />
-          <Pressable style={styles.submitButton}>
-            <FontAwesome name="paper-plane" size={20} color="#0d0d0d" />
-          </Pressable>
-        </View>
+    <>
+      <View style={[styles.header]}>
+        <Pressable onPress={onPressMenuButton}>
+          <FontAwesome name="bars" color="white" size={16} />
+        </Pressable>
+        <Text style={styles.appName}>UnKnown Me</Text>
       </View>
-    </KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        style={{ flex: 1 }}
+      >
+        <ThemedFlatList
+          contentContainerStyle={{ flex: 1 }}
+          data={data}
+          renderItem={({ item }) => <></>}
+          scrollEventThrottle={16}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <ThemedText>무슨 생각을 하고 계신가요?</ThemedText>
+            </View>
+          }
+        />
+        <View style={[styles.footer]}>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              autoFocus={true}
+              style={styles.input}
+              placeholder={"무슨 생각을 하고 계신가요?"}
+              placeholderTextColor={"#a6a5a5"}
+            />
+            <Pressable style={styles.submitButton}>
+              <FontAwesome name="paper-plane" size={20} color="#0d0d0d" />
+            </Pressable>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  header: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#181818",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  appName: {
+    marginLeft: 20,
+    color: "white",
+    fontWeight: 700,
+    fontSize: 16,
+  },
+  scrollInfo: {
+    color: "#a6a5a5",
+    fontSize: 12,
+    marginTop: 4,
+  },
   emptyContainer: {
     width: "100%",
     flex: 1,
