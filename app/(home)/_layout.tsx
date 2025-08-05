@@ -1,14 +1,20 @@
 import React from "react";
 
-import ScreenContainer from "@/components/ScreenContainer";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Slot } from "expo-router";
+import { Drawer } from "expo-router/drawer";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function HomeLayout() {
   const colorScheme = useColorScheme();
   return (
-    <ScreenContainer>
-      <Slot />
-    </ScreenContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer
+        screenOptions={{
+          drawerLabel: "Unknown Me",
+        }}
+      >
+        <Drawer.Screen name="index" options={{ title: "Unknown Me" }} />
+      </Drawer>
+    </GestureHandlerRootView>
   );
 }
