@@ -15,42 +15,44 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [data, setData] = React.useState([]);
-  const { top, bottom } = useSafeAreaInsets();
+  const { bottom: insetBottom } = useSafeAreaInsets();
 
   const onPressMenuButton = () => {};
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
-      style={{ flex: 1 }}
-    >
-      <ThemedFlatList
-        contentContainerStyle={{
-          flex: 1,
-        }}
-        data={data}
-        renderItem={({ item }) => <></>}
-        scrollEventThrottle={16}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <ThemedText>무슨 생각을 하고 계신가요?</ThemedText>
+    <View style={{ flex: 1, paddingBottom: insetBottom }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        style={{ flex: 1 }}
+      >
+        <ThemedFlatList
+          contentContainerStyle={{
+            flex: 1,
+          }}
+          data={data}
+          renderItem={({ item }) => <></>}
+          scrollEventThrottle={16}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <ThemedText>무슨 생각을 하고 계신가요?</ThemedText>
+            </View>
+          }
+        />
+        <View style={[styles.footer]}>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              autoFocus={true}
+              style={styles.input}
+              placeholder={"무슨 생각을 하고 계신가요?"}
+              placeholderTextColor={"#a6a5a5"}
+            />
+            <Pressable style={[styles.submitButton]}>
+              <FontAwesome name="paper-plane" size={20} color="#0d0d0d" />
+            </Pressable>
           </View>
-        }
-      />
-      <View style={[styles.footer]}>
-        <View style={styles.inputWrapper}>
-          <TextInput
-            autoFocus={true}
-            style={styles.input}
-            placeholder={"무슨 생각을 하고 계신가요?"}
-            placeholderTextColor={"#a6a5a5"}
-          />
-          <Pressable style={styles.submitButton}>
-            <FontAwesome name="paper-plane" size={20} color="#0d0d0d" />
-          </Pressable>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 
