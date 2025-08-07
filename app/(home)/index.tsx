@@ -20,15 +20,14 @@ export default function HomeScreen() {
   const onPressMenuButton = () => {};
 
   return (
-    <View style={{ flex: 1, paddingBottom: insetBottom }}>
+    <>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={{ flex: 1 }}
+        keyboardVerticalOffset={109 - insetBottom}
       >
         <ThemedFlatList
-          contentContainerStyle={{
-            flex: 1,
-          }}
+          contentContainerStyle={{ flex: 1 }}
           data={data}
           renderItem={({ item }) => <></>}
           scrollEventThrottle={16}
@@ -38,7 +37,7 @@ export default function HomeScreen() {
             </View>
           }
         />
-        <View style={[styles.footer]}>
+        <View style={[styles.footer, { paddingBottom: insetBottom }]}>
           <View style={styles.inputWrapper}>
             <TextInput
               autoFocus={true}
@@ -52,7 +51,7 @@ export default function HomeScreen() {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </View>
+    </>
   );
 }
 

@@ -13,8 +13,14 @@ export default function HomeLayout() {
           drawerLabel: "Unknown Me",
         }}
       >
-        <Drawer.Screen name="index" options={{ title: "Unknown Me" }} />
+        <Drawer.Screen
+          name="index"
+          options={{
+            title: "Unknown Me",
+          }}
+        />
       </Drawer>
+      {/* <Slot /> */}
     </GestureHandlerRootView>
   );
 }
