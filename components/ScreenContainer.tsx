@@ -1,7 +1,9 @@
 import React, { PropsWithChildren } from "react";
-import { ThemedView } from "./ThemedView";
+import { ThemedSafeAreaView } from "./ThemedSafeAreaView";
 
 const ScreenContainer = ({ children }: PropsWithChildren) => {
-  return <ThemedView style={{ flex: 1 }}>{children}</ThemedView>;
+  return (
+    <ThemedSafeAreaView style={{ flex: 1 }}>{children}</ThemedSafeAreaView>
+  );
 };
 export default ScreenContainer;

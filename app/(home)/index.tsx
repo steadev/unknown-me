@@ -9,13 +9,18 @@ import {
 
 import { ThemedFlatList } from "@/components/ThemedFlatList";
 import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [data, setData] = React.useState([]);
-  const { bottom: insetBottom } = useSafeAreaInsets();
+  const [isInputFocused, setIsInputFocused] = React.useState(false);
+  const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets();
+  const inputRef = React.useRef<TextInput>(null);
+  const borderColor = useThemeColor({}, "border");
 
   const onPressMenuButton = () => {};
 
@@ -24,7 +29,7 @@ export default function HomeScreen() {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={{ flex: 1 }}
-        keyboardVerticalOffset={109 - insetBottom}
+        keyboardVerticalOffset={insetTop + insetBottom}
       >
         <ThemedFlatList
           contentContainerStyle={{ flex: 1 }}
@@ -37,19 +42,28 @@ export default function HomeScreen() {
             </View>
           }
         />
-        <View style={[styles.footer, { paddingBottom: insetBottom }]}>
-          <View style={styles.inputWrapper}>
+        <ThemedView
+          style={[
+            styles.footer,
+            { borderTopColor: borderColor },
+            { paddingBottom: isInputFocused ? 12 : insetBottom },
+          ]}
+        >
+          <ThemedView style={styles.inputWrapper}>
             <TextInput
+              ref={inputRef}
               autoFocus={true}
               style={styles.input}
               placeholder={"무슨 생각을 하고 계신가요?"}
               placeholderTextColor={"#a6a5a5"}
+              onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
             />
             <Pressable style={[styles.submitButton]}>
               <FontAwesome name="paper-plane" size={20} color="#0d0d0d" />
             </Pressable>
-          </View>
-        </View>
+          </ThemedView>
+        </ThemedView>
       </KeyboardAvoidingView>
     </>
   );
@@ -87,7 +101,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingTop: 12,
     paddingBottom: 12,
-    borderTopColor: "#181818",
     borderTopWidth: 1,
   },
   inputWrapper: {
@@ -95,7 +108,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingVertical: 8,
     paddingRight: 8,
-    backgroundColor: "#414141",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
