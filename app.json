@@ -44,6 +44,12 @@
         "projectId": "914783b1-8b87-4447-80e2-ca124cf70c8e"
       }
     },
-    "owner": "steadev"
+    "owner": "steadev",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/914783b1-8b87-4447-80e2-ca124cf70c8e"
+    }
   }
 }

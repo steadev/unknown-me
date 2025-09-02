@@ -10,9 +10,10 @@ import {
 import { ThemedFlatList } from "@/components/ThemedFlatList";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { ChatQuery } from "@/features/chat/queries/chat.queries";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
@@ -22,7 +23,11 @@ export default function HomeScreen() {
   const inputRef = React.useRef<TextInput>(null);
   const borderColor = useThemeColor({}, "border");
 
-  const onPressMenuButton = () => {};
+  useEffect(() => {
+    ChatQuery.getChats().then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   return (
     <>
